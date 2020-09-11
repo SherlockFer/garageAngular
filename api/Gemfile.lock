@@ -1,0 +1,145 @@
+GIT
+  remote: https://github.com/BrandyMint/rack-swagger-ui
+  revision: f50647f255097b494f7a76d9d4622427cbee6196
+  specs:
+    rack-swagger-ui (1.0.0)
+      rack
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (4.2.10)
+      activesupport (= 4.2.10)
+      builder (~> 3.1)
+    activerecord (4.2.10)
+      activemodel (= 4.2.10)
+      activesupport (= 4.2.10)
+      arel (~> 6.0)
+    activesupport (4.2.10)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    airborne (0.3.4)
+      activesupport
+      rack
+      rack-test (>= 1.1.0, < 2.0)
+      rest-client (>= 2.0.2, < 3.0)
+      rspec (~> 3.8)
+    arel (6.0.4)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
+    bcrypt (3.1.13)
+    builder (3.2.3)
+    byebug (11.0.1)
+    chronic (0.10.2)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    concurrent-ruby (1.0.5)
+    database_cleaner (1.7.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    diff-lcs (1.3)
+    domain_name (0.5.20180417)
+      unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.4.0)
+    equalizer (0.0.11)
+    factory_bot (5.0.2)
+      activesupport (>= 4.2.0)
+    faker (1.9.6)
+      i18n (>= 0.7)
+    grape (1.0.2)
+      activesupport
+      builder
+      mustermann-grape (~> 1.0.0)
+      rack (>= 1.3.0)
+      rack-accept
+      virtus (>= 1.0.0)
+    grape-entity (0.7.1)
+      activesupport (>= 4.0)
+      multi_json (>= 1.3.2)
+    grape-swagger (0.32.1)
+      grape (>= 0.16.2)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
+    jwt (2.2.1)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
+    minitest (5.11.3)
+    multi_json (1.13.1)
+    mustermann (1.0.2)
+    mustermann-grape (1.0.0)
+      mustermann (~> 1.0.0)
+    mysql2 (0.4.10)
+    netrc (0.11.0)
+    rack (1.6.9)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-cors (1.0.2)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
+    rake (10.4.2)
+    require_all (2.0.0)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.2)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.2)
+    thread_safe (0.3.6)
+    tzinfo (1.2.5)
+      thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.5)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activerecord
+  airborne
+  bcrypt
+  byebug
+  chronic
+  database_cleaner
+  dotenv
+  factory_bot
+  faker
+  grape
+  grape-entity
+  grape-swagger
+  jwt
+  mysql2 (~> 0.4.4)
+  rack (~> 1.6.0)
+  rack-cors
+  rack-swagger-ui!
+  rack-test
+  rake (~> 10.4.2)
+  require_all
+  rspec
+
+BUNDLED WITH
+   2.0.2

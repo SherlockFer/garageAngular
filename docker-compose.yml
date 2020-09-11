@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:  
+  db:   
+    image: mariadb
+    volumes:
+      - /var/docker/mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_HOST=%
+  api:
+    build: 
+      context: api/
+      args:
+        - RACK_ENV=${RACK_ENV}
+    depends_on:
+      - db    
+    ports:
+      - "3000:3000"
+    environment:
+      - RACK_ENV=${RACK_ENV}
+      - DB_HOST=db
+      - DB_USER=root
+  web:
+    build: web/
+    depends_on:
+      - db
+      - api
+    ports:
+      - "80:8080"
+    

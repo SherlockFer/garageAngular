@@ -1,0 +1,84 @@
+require 'rubygems'
+require 'bundler'
+
+begin
+  Bundler.setup(:default, :development)
+  rescue Bundler::BundlerError => e
+    $stderr.puts e.message
+    $stderr.puts 'Run `bundle install` to install missing gems'
+    exit e.status_code
+end
+
+task :environment do
+  require File.expand_path('../config/environment', __FILE__)
+end
+
+desc "API Routes"
+task routes: :environment do
+  GarageAPI::Base.routes.each do |api|
+    method = api.request_method.ljust(10)
+    path   = api.path
+    puts "     #{method} #{path}"
+  end
+end
+
+namespace :bdd do
+  desc "Start Behavior-Driven Development mode" #brew install watchexec
+  task :start => ["db:reset", "db:seed"] do
+    sh "watchexec --exts rb rspec"
+  end  
+end
+
+namespace :db do
+
+  require "active_record"
+  require 'yaml'
+  require 'erb'
+  
+  desc "Create the database"
+  task :create => :environment do
+    db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)   
+    ActiveRecord::Base.establish_connection(db_config["default"])    
+    ActiveRecord::Base.connection.create_database(db_config[ENV['RACK_ENV']]["database"])
+    puts "Database created."
+  end
+
+  desc "Drop the database"
+  task :drop => :environment do
+    db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)   
+    ActiveRecord::Base.establish_connection(db_config["default"])
+    ActiveRecord::Base.connection.drop_database(db_config[ENV['RACK_ENV']]["database"])
+    puts "Database deleted."
+  end
+
+  desc 'Create tables from db/schema.rb'
+  task :load_schema => :environment do
+    db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)     
+    ActiveRecord::Base.establish_connection(db_config[ENV['RACK_ENV']])    
+    load("db/schema.rb")
+  end
+
+  desc 'Create a db/schema.rb file that is portable against any DB supported by AR'
+  task :dump_schema => :environment do
+    db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)  
+    ActiveRecord::Base.establish_connection(db_config[ENV['RACK_ENV']])
+    require 'active_record/schema_dumper'
+    filename = "db/schema.rb"
+    File.open(filename, "w:utf-8") do |file|
+      ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
+    end
+  end
+
+  desc 'Load the seed data from db/seeds.rb'
+  task :seed => :environment do
+    puts "Populating database"
+    db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)     
+    ActiveRecord::Base.establish_connection(db_config[ENV['RACK_ENV']])    
+    load("db/seed.rb")
+    puts "-- Database seeded."
+  end
+
+  desc "Reset the database"
+  task :reset => [:environment, :drop, :create, :load_schema] 
+
+end  

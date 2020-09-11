@@ -1,0 +1,29 @@
+## Setup docker in Ubuntu
+
+# Swap partition
+sudo /bin/dd if=/dev/zero of=/var/swap bs=1M count=1024
+sudo /sbin/mkswap /var/swap
+sudo chmod 600 /var/swap
+sudo /sbin/swapon /var/swap
+echo "/var/swap  swap    swap    defaults        0   0" | sudo tee -a /etc/fstab
+
+# Docker
+sudo apt-get update
+sudo apt install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+--Login again
+docker info
+--Docker compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+## Deploy Portainer on Docker
+docker network create default
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+## Logo and Icons
+Create png logo: https://vectr.com
+Split png: http://www.pictools.net/split/
+FontAwesome: https://fontawesome.com/v4.7.0/icons/
+Convert fontawesome to png: http://fatopng.com/fontawesome-to-png
