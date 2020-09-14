@@ -1,4 +1,4 @@
-## Guided Technology Project
+## Technology Project
 http://www.moshimoshiaqp.com/
 
 1. Final Project Overview
