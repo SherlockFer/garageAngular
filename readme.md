@@ -66,7 +66,7 @@ brew install docker-compose
 7. Clone the application from Github 
 ```
 git clone https://github.com/SherlockFer/garageAngular.git
-cd CCTGarage
+cd garage
 ```    
 8. Start-up the application. If some db error messages appears at `rake db:reset`, try again `make up` 
 ```
